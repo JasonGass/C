@@ -24,7 +24,6 @@ int main()
 {
 	int a = 999;
 	int b = 999;
-	
 	isPalindrome(1234);
 	return 0;
 }
