@@ -1,0 +1,45 @@
+#include <iostream>
+#include <fstream>
+#include <cstring>
+#include <cstdlib>
+
+using namespace std;
+int main()
+{
+	int grid[20][20];
+	int i = 0;
+	int max =0;
+	string line;
+	ifstream file ("grid.txt");
+	if (file.is_open())
+	{
+		while(file>>line)
+		{
+			grid[i/20][i%20] = atoi(line.c_str());
+			i++;
+		}
+		file.close();
+	}
+	else cout<<"Unable to open file";
+
+	//Search horizontally
+	for(int j =0; j< 20; j++)
+	{
+		for(i=0; i < 17; i++)
+		{
+			double mult = grid[j][i]*grid[j][i+1]*grid[j][i+2]*grid[j][i+3];
+			if (mult>max){max=mult;}
+		}	
+	}
+
+	//Search Vertically
+	for(int j =0; j< 20; j++)
+	{
+		for(i=0; i < 17; i++)
+		{
+			double mult = grid[i][j]*grid[i][j+1]*grid[i][j+2]*grid[i][j+3];
+			if (mult>max){max=mult;}
+		}	
+	}
+	return 0;
+}
