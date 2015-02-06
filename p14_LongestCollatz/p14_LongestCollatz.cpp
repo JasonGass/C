@@ -2,24 +2,27 @@
 
 using namespace std;
 
-unsigned int recall[2000000] = {0};
+unsigned int recall[1000000] = {0};
 
 unsigned int lengthOfCollatzChain(const int n)
 {
-	int num = n;
+	unsigned int y = n;
 	unsigned int count = 1;	
-	while(num!=1)
+	while(y!=1)
 	{
-		if(num < 1000000 && recall[num] != 0)
+		if (y<100001)
 		{
-			recall[n] = recall[num]+count-1;		
-			return recall[num]+count - 1; 
+			if(recall[y] != 0)
+			{
+				recall[n] = recall[y]+count-1;		
+				return recall[n];
+			}
 		}
 		count++;
-		if(num%2==0)
-			num/=2;
+		if(y%2==0)
+			y/=2;
 		else
-			num=3*num+1;
+			y=3*y+1;
 	}
 	recall[n] = count;
 	
@@ -29,13 +32,13 @@ int main()
 {
 	int number = 1000000;
 	unsigned int max = 0;
+	int iMax = 1;
 	unsigned int x = 0;
 	for(int i = 1; i < number; i++)
 	{
-		cout<<i<<endl;
 		x = lengthOfCollatzChain(i);
-		if (x>max){max=x;}
+		if (x>max){iMax=i; max=x;}
 	}
-	cout<<max<<endl;
+	cout<<iMax<<endl;
 	return 0;
 }
